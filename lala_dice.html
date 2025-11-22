@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>COGS3 - Best of 10!</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #8B0000;
+      font-family: 'Papyrus', sans-serif;
+    }
+
+    .container {
+      background: #1f1f26;
+      padding: 30px;
+      border-radius: 20px;
+      width: 70%;
+      margin: auto;
+      margin-top: 50px;
+    }
+
+    h1 {
+      margin: 30px;
+      text-shadow: 5px 0 #232931;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #8B0000;
+    }
+
+    h2,
+    h3 {
+      margin: 30px;
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: #8B0000;
+    }
+
+    img {
+      width: 80%;
+      background-color: #ef1f1f;
+      border-radius: 30%;
+      mix-blend-mode: hard-light;
+      box-shadow: 0 0 20px #3cc6d0;
+      transition: 0.3s ease;
+    }
+
+    img:hover {
+      transform: scale(1.1);
+    }
+
+    p {
+      color: #8B0000;
+    }
+
+    .btn-primary {
+      background-color: #8B0000;
+      border-color: #8B0000;
+    }
+
+    .btn-primary:hover {
+      background-color: #31a8b0;
+      border-color: #31a8b0;
+    }
+
+    footer {
+      margin-top: 5%;
+      color: #EEEEEE;
+      text-align: center;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container text-center">
+    <h1>Let's Roll the Dice!</h1>
+
+    <h2>
+      If the dice add to anything above 9, you win $5! <br>
+      If the dice add to 5 or less, I win $5. <br>
+      Ready to play?
+    </h2>
+
+    <h3></h3>
+
+    <div class="mt-4">
+      <p>Do you want to roll the dice?</p>
+
+      <button class="btn btn-primary btn-lg mt-2" onclick="letsPlay()">
+        Let's Play Again!
+      </button>
+    </div>
+
+    <div class="dice mt-4">
+      <img class="img1" src="https://fortnite.gg/img/items/19405/icon.png?3">
+    </div>
+
+    <div class="dice">
+      <img class="img2" src="https://images.freeimages.com/fic/images/icons/918/gamble/256/dice.png">
+    </div>
+  </div>
+
+  <footer>
+    COGS3 - Dice Game Bet 10 - Shyla Lala - 11/21
+  </footer>
+
+  <!-- JavaScript Section -->
+  <script>
+    var die1, die2, dieSum, balance, banner, outcome, die1Name, die2Name;
+    balance = 0;
+    var numRolls = 0;
+
+    function rollDice() {
+      die1 = Math.floor(Math.random() * 6) + 1;
+      die2 = Math.floor(Math.random() * 6) + 1;
+      dieSum = die1 + die2;
+
+      document.querySelector(".img1").src = "images/dice" + die1 + ".png";
+      document.querySelector(".img2").src = "images/dice" + die2 + ".png";
+    }
+
+    function whoWon() {
+      if (dieSum <= 5) {
+        outcome = "You lose, please pay me $5.";
+        balance -= 5;
+      } else if (dieSum >= 9) {
+        outcome = "You win, I pay you $5!";
+        balance += 5;
+      } else {
+        outcome = "It's a draw — nobody wins or loses.";
+      }
+
+      banner = die1 + " + " + die2 + " = " + dieSum;
+    }
+
+    function letsPlay() {
+      numRolls = parseInt(prompt("How many times do you want to play?"), 10);
+
+      if (isNaN(numRolls) || numRolls <= 0) {
+        alert("Please enter a valid positive number.");
+        return;
+      }
+
+      balance = 0;
+
+      for (let i = 1; i <= numRolls; i++) {
+        rollDice();
+        whoWon();
+      }
+
+      document.querySelector("h3").innerHTML =
+        banner + "<br>" +
+        outcome + "<br><br>" +
+        "Total plays: " + numRolls + "<br>" +
+        "Final balance: $" + balance;
+    }
+  </script>
+
+</body>
+
+</html>
